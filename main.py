@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from decouple import config
 
 client = commands.Bot(command_prefix = '$')
 
@@ -18,7 +19,7 @@ async def on_message(message):
 
 
 
-client.run('NzkxMjAwNDE3NzY5MDYyNDMx.X-Lszw.v4esRkf69ROeDLBqBBAwuKADI8c')
+client.run(config('DISCORDSECRET'))
 
 
 
