@@ -2,22 +2,22 @@ import discord
 from discord.ext import commands
 from decouple import config
 
-client = commands.Bot(command_prefix = '$')
+
+class myClient(discord.Client):
+
+    async def on_ready(self):
+        print('Logged in as {0.user}'.format(self))
 
 
-@client.event
-async def on_ready():
-    print('Logged in as {0.user}'.format(client))
+    async def on_message(self, message):
+        if message.author == self.user:
+            return
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
-
-    if message.content.startswith('hello'):
-        await message.channel.send('BEEPBIPBIPEBEBBPEIBEIRIANWRIPONWA')
+        if message.content.startswith('hello'):
+            await message.channel.send('BEEPBIPBIPEBEBBPEIBEIRIANWRIPONWA')
 
 
+client = myClient()
 
 client.run(config('DISCORDSECRET'))
 
