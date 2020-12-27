@@ -1,9 +1,15 @@
+import sys
+sys.path.append('Classes')
+
 import discord
-from discord.ext import commands
+from MessageHandler import MessageHandler
 from decouple import config
 
 
 class myClient(discord.Client):
+    def __init__(self):
+        super().__init__()
+        self.messageHandler = MessageHandler()
 
     async def on_ready(self):
         print('Logged in as {0.user}'.format(self))
@@ -13,12 +19,15 @@ class myClient(discord.Client):
         if message.author == self.user:
             return
 
-        if message.content.startswith('hello'):
-            await message.channel.send('BEEPBIPBIPEBEBBPEIBEIRIANWRIPONWA')
+        returnMessage = self.messageHandler.getReturnMessage(message)
+
+        if not returnMessage:
+            return
+
+        await message.channel.send(returnMessage)
 
 
 client = myClient()
-
 client.run(config('DISCORDSECRET'))
 
 
