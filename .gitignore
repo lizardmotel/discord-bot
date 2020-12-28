@@ -1,3 +1,4 @@
 .env
 .idea/
 Lib/
+Classes/__pycache__/
