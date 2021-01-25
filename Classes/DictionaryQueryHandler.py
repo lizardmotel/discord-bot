@@ -9,7 +9,7 @@ class DictionaryQueryHandler:
         if word:
             definition = self.defineWord(word)
 
-        return definition if definition else None
+        return definition if definition else '%s does not exist' % (word)
 
     def getFirstWordFromSentence(self, sentence):
         splitSentence = sentence.split()
